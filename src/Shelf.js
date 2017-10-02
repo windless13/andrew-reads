@@ -6,6 +6,7 @@ import Book, { Container } from './Book';
 
 const ShelfContainer = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
 `;
 
@@ -27,6 +28,9 @@ class Shelf extends Component {
 				{this.props.books.map((bookItem) => {
 					return <Book key={bookItem.id} book={bookItem}/>;
 				})}
+				<Container/>
+				<Container/>
+				<Container/>
 			</ShelfContainer>
 		)
 	}

@@ -9,6 +9,11 @@ export const Container = styled.div`
 	margin: 10px 20px;
   	min-width: 100px;
   	min-height: 175px;
+  	max-width: 200px;
+
+  	${props => props.isInvisible && `
+  		height: 0;
+  	`}
 `;
 
 const OuterPicture = styled.div`
