@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import MediaQuery from 'react-responsive';
 
 import Book, { Container } from './Book';
 
@@ -9,6 +10,12 @@ const ShelfContainer = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 `;
+
+const Title = styled.div`
+	font-size: 34px;
+	font-weight: 500;
+	padding: 10px;
+`
 
 // const FlexPlaceholder = styled.div`
 // 	flex: 1 0 0;
@@ -23,15 +30,30 @@ class Shelf extends Component {
 	}
 
 	render() {
+		const {
+			books,
+			title
+		} = this.props;
+
 		return (
-			<ShelfContainer>
-				{this.props.books.map((bookItem) => {
-					return <Book key={bookItem.id} book={bookItem}/>;
-				})}
-				<Container/>
-				<Container/>
-				<Container/>
-			</ShelfContainer>
+			<div>
+				<Title>{title}</Title>
+
+				<ShelfContainer>
+					{books.map((bookItem) => {
+						return <Book key={bookItem.id} book={bookItem}/>;
+					})}
+					<MediaQuery query={'(max-width: 500px)'}>
+						<Container/>
+					</MediaQuery>
+					<MediaQuery query={'(max-width: 500px)'}>
+						<Container/>
+					</MediaQuery>
+
+
+
+				</ShelfContainer>
+			</div>
 		)
 	}
 

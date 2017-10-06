@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
-import './AndrewReads.css';
-import * as BooksAPI from './BooksAPI'
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Route } from 'react-router-dom'
+
+import * as BooksAPI from './BooksAPI';
 import Shelf from './Shelf';
+import Search from './Search';
+import { Colors } from './constants';
+
+const Header = styled.div`
+    font-size: 48px;
+    text-align: center;
+    padding: 24px 0;
+    background-color: ${Colors.darkGreen};
+    color: white;
+`
 
 class AndrewReads extends Component {
     state = {
@@ -37,8 +50,16 @@ class AndrewReads extends Component {
 
     render() {
         return (
-            <div className="AndrewReads">
-                <Shelf books={this.state.library.read}/>
+            <div>
+                <Header>
+                    My Reads
+                </Header>
+                <Route exact path='/' render={() => (
+                    <Shelf title={'Read'} books={this.state.library.read}/>
+                )}/>
+                <Route path='/search' render={() => (
+                    <Search/>
+                )}/>
             </div>
         );
     }
