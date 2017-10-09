@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom'
 
 import * as BooksAPI from './BooksAPI';
 import Shelf from './Shelf';
-import Search from './Search';
+import Search, { SearchLink } from './Search';
 import { Colors } from './constants';
 
 const Header = styled.div`
@@ -55,11 +55,17 @@ class AndrewReads extends Component {
                     My Reads
                 </Header>
                 <Route exact path='/' render={() => (
-                    <Shelf title={'Read'} books={this.state.library.read}/>
+                    <div> 
+                        <img src="/andrew.png"/>
+                        <SearchLink/>
+                        <Shelf title={'Read'} books={this.state.library.read}/>
+                        <SearchLink/>
+                    </div>
                 )}/>
                 <Route path='/search' render={() => (
                     <Search/>
                 )}/>
+
             </div>
         );
     }
