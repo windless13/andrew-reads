@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
+import Dropdown from './Dropdown';
 
 export const Container = styled.div`
 	display: flex;
@@ -58,6 +59,7 @@ class Book extends Component {
 			<Container>
 				<OuterPicture>
 					<Picture url={imageLinks ? imageLinks.thumbnail : ''}/>
+                    <Dropdown />
 				</OuterPicture>
 				<Title>{title} - {subtitle}</Title>
 				<Author>{authors}</Author>

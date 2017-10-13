@@ -17,13 +17,6 @@ const Title = styled.div`
 	padding: 10px;
 `
 
-// const FlexPlaceholder = styled.div`
-// 	flex: 1 0 0;
-// 	min-width: 100px;
-//  	margin: 10 20px;
-
-// `
-
 class Shelf extends Component {
 	static propTypes = {
 		books: PropTypes.array
@@ -56,7 +49,6 @@ class Shelf extends Component {
 			</div>
 		)
 	}
-
 }
 
 export default Shelf;
