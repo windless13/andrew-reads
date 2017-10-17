@@ -19,12 +19,15 @@ const Title = styled.div`
 
 class Shelf extends Component {
 	static propTypes = {
-		books: PropTypes.array
+		books: PropTypes.array,
+		bookUpdate: PropTypes.func,
+		title: PropTypes.string,
 	}
 
 	render() {
 		const {
 			books,
+			bookUpdate,
 			title
 		} = this.props;
 
@@ -34,7 +37,7 @@ class Shelf extends Component {
 
 				<ShelfContainer>
 					{books.map((bookItem) => {
-						return <Book key={bookItem.id} book={bookItem}/>;
+						return <Book key={bookItem.id} book={bookItem} bookUpdate={bookUpdate}/>;
 					})}
 					<MediaQuery query={'(max-width: 500px)'}>
 						<Container/>

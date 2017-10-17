@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import _ from 'lodash';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom'
 
@@ -47,6 +47,31 @@ class AndrewReads extends Component {
         }
     }
 
+    updateBookStatus = (bookToUpdate, oldStatus, newStatus)=> {
+        bookToUpdate.shelf = newStatus;
+        BooksAPI.update(bookToUpdate, newStatus).then((res) => {
+            if (res) {
+                this.setState((prevState) => {
+                    let newLibrary = prevState.library;
+                    const prevShelf = _.includes(['read', 'wantToRead', 'currentlyReading'], oldStatus)
+                        ? prevState.library[oldStatus]
+                        : [];
+
+                    debugger;
+                    newLibrary[oldStatus] = prevShelf.filter((book) => {
+                        return bookToUpdate.id !== book.id;
+                    });
+
+                    if (_.includes(['read', 'wantToRead', 'currentlyReading'], newStatus)) {
+                        newLibrary[newStatus] = _.concat(prevState.library[newStatus], bookToUpdate);
+                    }
+
+                    return { library: newLibrary };
+                });
+            }
+        });
+    }
+
     componentDidMount() {
         BooksAPI.getAll().then((data) => {
             const library = {};
@@ -64,8 +89,7 @@ class AndrewReads extends Component {
 
             this.setState({
                 library
-            })
-            console.log(this.state);
+            });
         })
 
     }
@@ -84,14 +108,26 @@ class AndrewReads extends Component {
                 </Header>
                 <Route exact path='/' render={() => (
                     <div>
-                        <Shelf title={'Currently Reading'} books={this.state.library.currentlyReading}/>
-                        <Shelf title={'Want to Read'} books={this.state.library.wantToRead}/>
-                        <Shelf title={'Read'} books={this.state.library.read}/>
+                        <Shelf
+                            bookUpdate={this.updateBookStatus}
+                            title={'Currently Reading'}
+                            books={this.state.library.currentlyReading}
+                        />
+                        <Shelf
+                            bookUpdate={this.updateBookStatus}
+                            title={'Want to Read'}
+                            books={this.state.library.wantToRead}
+                        />
+                        <Shelf
+                            bookUpdate={this.updateBookStatus}
+                            title={'Read'}
+                            books={this.state.library.read}
+                        />
                         <SearchLink />
                     </div>
                 )}/>
                 <Route path='/search' render={() => (
-                    <Search/>
+                    <Search library={this.state.library} bookUpdate={this.updateBookStatus} />
                 )}/>
 
             </div>

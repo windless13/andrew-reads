@@ -7,7 +7,7 @@ export const Container = styled.div`
 	display: flex;
 	flex: 1 0 0;
 	flex-direction: column;
-	margin: 10px 20px;
+	margin: 30px 20px;
   	min-width: 100px;
   	min-height: 175px;
   	max-width: 200px;
@@ -42,13 +42,9 @@ const Author = styled.div`
 
 class Book extends Component {
 	static propTypes = {
-		book: PropTypes.object
+		book: PropTypes.object,
+        bookUpdate: PropTypes.func,
 	}
-
-	state = {
-		query: ''
-	}
-
 
 	render() {
 		const book = this.props.book || {};
@@ -59,7 +55,7 @@ class Book extends Component {
 			<Container>
 				<OuterPicture>
 					<Picture url={imageLinks ? imageLinks.thumbnail : ''}/>
-                    <Dropdown />
+                    <Dropdown book={book} bookUpdate={this.props.bookUpdate} />
 				</OuterPicture>
 				<Title>{title} - {subtitle}</Title>
 				<Author>{authors}</Author>
