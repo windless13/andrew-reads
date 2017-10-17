@@ -39,15 +39,6 @@ class Shelf extends Component {
 					{books.map((bookItem) => {
 						return <Book key={bookItem.id} book={bookItem} bookUpdate={bookUpdate}/>;
 					})}
-					<MediaQuery query={'(max-width: 500px)'}>
-						<Container/>
-					</MediaQuery>
-					<MediaQuery query={'(max-width: 500px)'}>
-						<Container/>
-					</MediaQuery>
-
-
-
 				</ShelfContainer>
 			</div>
 		)

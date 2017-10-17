@@ -4,13 +4,17 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import DownIcon from './icons/down.svg';
-import { COLORS } from './constants';
+import { COLORS, SHELF } from './constants';
 
 const Container = styled.div`
     text-align: right;
+    position: relative;
+    height: 0;
 `;
 
 const DropdownToggle = styled.div`
+    margin-top: -20px;
+    margin-right: -20px;
     height: 40px;
     width: 40px;
     background-color: ${props => props.isVisible
@@ -101,36 +105,37 @@ export default class Dropdown extends Component {
                 <DropdownContent isVisible={this.state.isOpen}>
                     Move to...
                     <DropdownLink
-                        highlighted={book.shelf === 'currentlyReading'}
+                        highlighted={book.shelf === SHELF.current}
                         onClick={()=> {
                             this.closeDropdown();
-                            bookUpdate(book, book.shelf, 'currentlyReading');
+                            bookUpdate(book, book.shelf, SHELF.current);
                         }
                     }>
                         Currently Reading
-                    </DropdownLink>                    <DropdownLink
-                        highlighted={book.shelf === 'wantToRead'}
+                    </DropdownLink>
+                    <DropdownLink
+                        highlighted={book.shelf === SHELF.want}
                         onClick={()=> {
                             this.closeDropdown();
-                            bookUpdate(book, book.shelf, 'wantToRead');
+                            bookUpdate(book, book.shelf, SHELF.want);
                         }
                     }>
                         Want to Read
                     </DropdownLink>
                     <DropdownLink
-                        highlighted={book.shelf === 'read'}
+                        highlighted={book.shelf === SHELF.read}
                         onClick={()=> {
                             this.closeDropdown();
-                            bookUpdate(book, book.shelf, 'read');
+                            bookUpdate(book, book.shelf, SHELF.read);
                         }
                     }>
                         Read
                     </DropdownLink>
                     <DropdownLink
-                        highlighted={!_.includes(['currentlyReading', 'wantToRead', 'read'], book.shelf)}
+                        highlighted={!_.includes(SHELF.all, book.shelf)}
                         onClick={()=> {
                             this.closeDropdown();
-                            bookUpdate(book, book.shelf);
+                            bookUpdate(book, book.shelf, "none");
                         }
                     }>
                         None

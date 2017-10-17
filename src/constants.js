@@ -8,7 +8,8 @@ export const COLORS = {
 }
 
 export const SHELF = {
-    READ: 'read',
-    WANT: 'wantToRead',
-    CURRENT: 'currentlyReading',
+    read: 'read',
+    want: 'wantToRead',
+    current: 'currentlyReading',
+    all: ['read', 'wantToRead', 'currentlyReading'],
 }

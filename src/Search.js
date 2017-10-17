@@ -7,6 +7,7 @@ import Image from './icons/search.png';
 import SearchIcon from './icons/search-bar.png';
 import * as BooksAPI from './BooksAPI';
 import Shelf from './Shelf';
+import { SHELF } from './constants';
 
 const StickyButton = styled.div`
 	height: 60px;
@@ -65,11 +66,11 @@ export default class Search extends Component {
 					query: query,
 					booksShown: _.map(results, (book) => {
 						if (_.find(read, ['id', book.id])) {
-							_.assign(book, { shelf: 'read' });
+							_.assign(book, { shelf: SHELF.read });
 						} else if (_.find(wantToRead, ['id', book.id])) {
-							_.assign(book, { shelf: 'wantToRead' });
+							_.assign(book, { shelf: SHELF.want });
 						} else if (_.find(currentlyReading, ['id', book.id])) {
-							_.assign(book, { shelf: 'currentlyReading' });
+							_.assign(book, { shelf: SHELF.current });
 						} else {
 							_.assign(book, { shelf: 'none' });
 						}

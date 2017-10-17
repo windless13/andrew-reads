@@ -41,9 +41,9 @@ const BackButton = styled.div`
 class AndrewReads extends Component {
     state = {
         library: {
-            [SHELF.READ]: [],
-            [SHELF.WANT]: [],
-            [SHELF.CURRENT]: [],
+            [SHELF.read]: [],
+            [SHELF.want]: [],
+            [SHELF.current]: [],
         }
     }
 
@@ -53,7 +53,7 @@ class AndrewReads extends Component {
             if (res) {
                 this.setState((prevState) => {
                     let newLibrary = prevState.library;
-                    const prevShelf = _.includes([SHELF.READ, SHELF.WANT, 'currentlyReading'], oldStatus)
+                    const prevShelf = _.includes(SHELF.all, oldStatus)
                         ? prevState.library[oldStatus]
                         : [];
 
@@ -61,7 +61,7 @@ class AndrewReads extends Component {
                         return bookToUpdate.id !== book.id;
                     });
 
-                    if (_.includes([SHELF.READ, SHELF.WANT, 'currentlyReading'], newStatus)) {
+                    if (_.includes(SHELF.all, newStatus)) {
                         newLibrary[newStatus] = _.concat(prevState.library[newStatus], bookToUpdate);
                     }
 
@@ -74,16 +74,16 @@ class AndrewReads extends Component {
     componentDidMount() {
         BooksAPI.getAll().then((data) => {
             const library = {};
-            library.read = data.filter((book) => {
-                return book.shelf === 'read';
+            library[SHELF.read] = data.filter((book) => {
+                return book.shelf === SHELF.read;
             });
 
-            library.wantToRead = data.filter((book) => {
-                return book.shelf === 'wantToRead';
+            library[SHELF.want] = data.filter((book) => {
+                return book.shelf === SHELF.want;
             });
 
-            library.currentlyReading = data.filter((book) => {
-                return book.shelf === 'currentlyReading';
+            library[SHELF.current] = data.filter((book) => {
+                return book.shelf === SHELF.current;
             });
 
             this.setState({
