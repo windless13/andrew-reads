@@ -6,7 +6,7 @@ import { Route, Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI';
 import Shelf from './Shelf';
 import Search, { SearchLink } from './Search';
-import { Colors } from './constants';
+import { COLORS, SHELF } from './constants';
 import Back from './icons/back.png';
 
 const Header = styled.div`
@@ -14,7 +14,7 @@ const Header = styled.div`
     font-size: 28px;
     text-align: center;
     padding: 24px 0;
-    background-color: ${Colors.darkGreen};
+    background-color: ${COLORS.darkGreen};
     color: white;
 `
 
@@ -41,9 +41,9 @@ const BackButton = styled.div`
 class AndrewReads extends Component {
     state = {
         library: {
-            read: [],
-            wantToRead: [],
-            currentlyReading: [],
+            [SHELF.READ]: [],
+            [SHELF.WANT]: [],
+            [SHELF.CURRENT]: [],
         }
     }
 
@@ -53,16 +53,15 @@ class AndrewReads extends Component {
             if (res) {
                 this.setState((prevState) => {
                     let newLibrary = prevState.library;
-                    const prevShelf = _.includes(['read', 'wantToRead', 'currentlyReading'], oldStatus)
+                    const prevShelf = _.includes([SHELF.READ, SHELF.WANT, 'currentlyReading'], oldStatus)
                         ? prevState.library[oldStatus]
                         : [];
 
-                    debugger;
                     newLibrary[oldStatus] = prevShelf.filter((book) => {
                         return bookToUpdate.id !== book.id;
                     });
 
-                    if (_.includes(['read', 'wantToRead', 'currentlyReading'], newStatus)) {
+                    if (_.includes([SHELF.READ, SHELF.WANT, 'currentlyReading'], newStatus)) {
                         newLibrary[newStatus] = _.concat(prevState.library[newStatus], bookToUpdate);
                     }
 

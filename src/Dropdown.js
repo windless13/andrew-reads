@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import DownIcon from './icons/down.svg';
-import { Colors } from './constants';
+import { COLORS } from './constants';
 
 const Container = styled.div`
     text-align: right;
@@ -14,8 +14,8 @@ const DropdownToggle = styled.div`
     height: 40px;
     width: 40px;
     background-color: ${props => props.isVisible
-        ? Colors.darkGreen
-        : Colors.searchGreen
+        ? COLORS.darkGreen
+        : COLORS.searchGreen
     };
     mask-image: url(${DownIcon});
     mask-size: contain;
