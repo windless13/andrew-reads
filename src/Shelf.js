@@ -12,10 +12,8 @@ const ShelfContainer = styled.div`
 `;
 
 const Title = styled.div`
-	font-size: 24px;
-	font-weight: 500;
 	padding: 25px;
-    font-family: 'Oswald', 'Verdana', sans-serif;
+	font: 500 24px 'Oswald', 'Verdana', sans-serif;
 `
 
 class Shelf extends Component {

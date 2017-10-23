@@ -11,12 +11,11 @@ import Back from './icons/back.png';
 
 const Header = styled.div`
     position: relative;
-    font-size: 28px;
     text-align: center;
     padding: 24px 0;
     background-color: ${COLORS.darkGreen};
     color: white;
-    font-family: 'Oswald', 'Verdana', sans-serif;
+    font: 28px 'Oswald', 'Verdana', sans-serif;
     text-transform: uppercase;
 `
 
@@ -92,7 +91,6 @@ class AndrewReads extends Component {
                 library
             });
         })
-
     }
 
     render() {

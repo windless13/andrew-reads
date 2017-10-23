@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import Dropdown from './Dropdown';
@@ -25,14 +26,14 @@ export const Container = styled.div`
 `;
 
 const Title = styled.div`
-	font-size: 12px;
-	font-style: italic;
+	font: bold 12px Helvetica;
 	margin-top: 12px;
 `;
 
 const Author = styled.div`
 	font-size: 10px;
 `;
+
 
 class Book extends Component {
 	static propTypes = {
@@ -49,7 +50,13 @@ class Book extends Component {
                 <img alt={title} src={imageLinks ? imageLinks.thumbnail : ''} />
                 <Dropdown book={book} bookUpdate={this.props.bookUpdate} />
 				<Title>{title} - {subtitle}</Title>
-				<Author>{authors}</Author>
+				<Author>
+                {_.map(authors, (author) => {
+                    return author === _.first(authors)
+                        ? author
+                        : `, ${author}`;
+                })}
+                </Author>
 			</Container>
 		)
 	}
