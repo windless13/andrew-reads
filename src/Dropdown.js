@@ -12,9 +12,16 @@ const Container = styled.div`
     height: 0;
 `;
 
+const DropdownTitle = styled.div`
+    font-family: 'Oswald', 'Verdana', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    background-color: ${COLORS.lightGreen};
+`;
+
 const DropdownToggle = styled.div`
     margin-top: -20px;
-    margin-right: -20px;
+    margin-right: -30px;
     height: 40px;
     width: 40px;
     background-color: ${props => props.isVisible
@@ -36,16 +43,23 @@ const DropdownContent = styled.div`
     position: absolute;
     z-index: 1;
     background: white;
-    right: 0;
+    left: 100%;
+
+    border-radius: 10px;
 `;
 
 const DropdownLink = styled.a`
+    text-align: left;
     display: block;
     padding: 4px 20px;
 
     &:hover {
         cursor: pointer;
-        background-color: pink;
+        background-color: lightBlue;
+
+        &:last-child {
+            border-radius: 0 0 10px 10px;
+        }
     }
 
     ${props => props.highlighted && `
@@ -85,8 +99,6 @@ export default class Dropdown extends Component {
         console.log('toggle');
         this.setState((prevState) => {
             return { isOpen: !prevState.isOpen };
-        }, () => {
-
         });
     }
 
@@ -103,7 +115,7 @@ export default class Dropdown extends Component {
                     onClick={this.toggle}>
                 </DropdownToggle>
                 <DropdownContent isVisible={this.state.isOpen}>
-                    Move to...
+                    <DropdownTitle>Move to...</DropdownTitle>
                     <DropdownLink
                         highlighted={book.shelf === SHELF.current}
                         onClick={()=> {

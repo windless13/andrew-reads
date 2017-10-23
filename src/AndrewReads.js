@@ -16,6 +16,8 @@ const Header = styled.div`
     padding: 24px 0;
     background-color: ${COLORS.darkGreen};
     color: white;
+    font-family: 'Oswald', 'Verdana', sans-serif;
+    text-transform: uppercase;
 `
 
 const BackButton = styled.div`
@@ -47,7 +49,7 @@ class AndrewReads extends Component {
         }
     }
 
-    updateBookStatus = (bookToUpdate, oldStatus, newStatus)=> {
+    updateBookStatus = (bookToUpdate, oldStatus, newStatus) => {
         bookToUpdate.shelf = newStatus;
         BooksAPI.update(bookToUpdate, newStatus).then((res) => {
             if (res) {
@@ -128,7 +130,6 @@ class AndrewReads extends Component {
                 <Route path='/search' render={() => (
                     <Search library={this.state.library} bookUpdate={this.updateBookStatus} />
                 )}/>
-
             </div>
         );
     }

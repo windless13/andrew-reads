@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import MediaQuery from 'react-responsive';
-
-import Book, { Container } from './Book';
+import { COLORS } from './constants';
+import Book from './Book';
 
 const ShelfContainer = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	border-bottom: 1px solid ${COLORS.border};
 `;
 
 const Title = styled.div`
-	font-size: 34px;
+	font-size: 24px;
 	font-weight: 500;
-	padding: 10px;
+	padding: 25px;
+    font-family: 'Oswald', 'Verdana', sans-serif;
 `
 
 class Shelf extends Component {

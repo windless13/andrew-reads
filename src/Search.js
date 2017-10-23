@@ -29,10 +29,15 @@ const SearchBar = styled.input`
 	background-repeat: no-repeat;
 	font-size: 24px;
 	padding-left: 42px;
+
+	&:focus {
+		outline: none;
+	}
 `;
 
-const SearchResults = styled.div``;
-const Title = styled.div``;
+const NoResults = styled.div`
+	padding: 40px;
+`;
 
 export function SearchLink() {
 	return (
@@ -54,11 +59,7 @@ export default class Search extends Component {
 	}
 
 	searchHandler = (event) => {
-		console.log('hi');
-		console.log(event.target.value);
 		const query = event.target.value;
-		const library = this.props.library;
-		debugger;
 		const { read, wantToRead, currentlyReading } = this.props.library;
 		BooksAPI.search(event.target.value).then((results) => {
 			if (results && !results.error) {
@@ -92,17 +93,16 @@ export default class Search extends Component {
 				<form>
 					<SearchBar onChange={this.searchHandler.bind(this)} value={this.state.query} />
 				</form>
-				<SearchResults>
-                    <Shelf
-                        bookUpdate={this.props.bookUpdate}
-                        title={'Search Results'}
-                        books={this.state.booksShown}
-                    />
-				</SearchResults>
+                <Shelf
+                    bookUpdate={this.props.bookUpdate}
+                    title={'Search Results'}
+                    books={this.state.booksShown}
+                />
+
+                {_.isEmpty(this.state.booksShown) &&
+                	<NoResults> No results found </NoResults>
+                }
 			</div>
 		)
 	}
-
 }
-
-

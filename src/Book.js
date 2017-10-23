@@ -7,7 +7,6 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin: 30px 20px;
-    border: 1px solid blue;
 
     @media screen and (max-width: 480px) {
         width: 100px;
@@ -23,32 +22,7 @@ export const Container = styled.div`
         width: 150px;
         height: 300px;
     }
-
-  	${props => props.isInvisible && `
-  		height: 0;
-  	`}
 `;
-
-const OuterPicture = styled.div`
-  position: relative;
-  width: 100%;
-  box-shadow: 10px 10px 10px gray;
-`
-
-const Picture = styled.div`
-	padding-top: 170%;
-	background-image: url(${props => props.url});
-	background-size: 100%;
-	background-repeat: no-repeat;
-`;
-
-const MyPicture = styled.div`
-    background-image: url(${props => props.url});
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 200px;
-    width: 100px;
-`
 
 const Title = styled.div`
 	font-size: 12px;
@@ -69,16 +43,10 @@ class Book extends Component {
 	render() {
 		const book = this.props.book || {};
     	const { title, subtitle, authors, imageLinks } = book;
-/*
-                <OuterPicture>
-                    <Picture url={imageLinks ? imageLinks.thumbnail : ''}/>
-                    <Dropdown book={book} bookUpdate={this.props.bookUpdate} />
-                </OuterPicture>
-*/
 
 		return (
 			<Container>
-                <img src={imageLinks ? imageLinks.thumbnail : ''} />
+                <img alt={title} src={imageLinks ? imageLinks.thumbnail : ''} />
                 <Dropdown book={book} bookUpdate={this.props.bookUpdate} />
 				<Title>{title} - {subtitle}</Title>
 				<Author>{authors}</Author>
